@@ -5,11 +5,12 @@
 
 template<typename T>
 class TPQueue {
-  private:
+private:
   T *arr;
   int size;
   int begin, end;
   int count;
+
 public:
   TPQueue() :
     size(100),
@@ -33,9 +34,9 @@ public:
         }
       }
       arr[end++] = item;
-    } else
+    } else {
       arr[end++] = item;
-
+    }
     if (tr) {
       for (int i = count - 1; i >= 0; i--)
         arr[end++] = mas[i];
