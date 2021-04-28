@@ -24,36 +24,29 @@ public:
   void push(const T &item) {
     assert(count < size);
 
-    T *mas = new T[count];
-    bool tr = false;
     if (end != 0) {
-      for (int i = 0; i < count; i++) {
-        if (item.prior > arr[end - 1].prior) {
-          mas[i] = arr[--end];
-          tr = true;
+      for (int i = end - 1; i >= 0; i--) {
+        if (item.prior > arr[i].prior) {
+          arr[i + 1] = arr[i];
+        } else {
+          arr[i + 1] = item;
+          break;
+        }
+        if (i == 0) {
+          arr[0] = item;
         }
       }
-      arr[end++] = item;
     } else {
-      arr[end++] = item;
+      arr[end] = item;
     }
-    if (tr) {
-      for (int i = count - 1; i >= 0; i--)
-        arr[end++] = mas[i];
-    }
+    end++;
     count++;
-
-    if (end > size)
-      end -= size + 1;
   }
   T pop() {
     assert(count > 0);
 
     T item = arr[begin++];
     count--;
-
-    if (begin > size)
-      begin -= size + 1;
 
     return item;
   }
